@@ -38,7 +38,8 @@ $all = json_decode($json, true);
                         <p ><?php echo utf8_decode($post['caption']['text']) ?></p>
 
                         <p ><b>comments: </b><?php echo utf8_decode($post['comments']['count']) ?></p>
-                        <?php if ($post['comments']['count'] > 0) { ?>
+                        <?php if ($post['comments']['count'] > 0) {
+                            ?>
                             <div class="comments img-rounded ">
                                 <?php foreach ($post['comments']['data'] as $comment) { ?>
                                     <p ><?php echo utf8_decode($comment['from']['username']) ?>:<?php echo utf8_decode($comment['text']) ?></p>
