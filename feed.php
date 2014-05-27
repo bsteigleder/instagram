@@ -24,33 +24,34 @@ $all = json_decode($json, true);
         <div class="container">
             <div class="row">
 
-                <?php
-                foreach ($all['data'] as $post) {?>
+                <?php foreach ($all['data'] as $post) { ?>
                     <div class = "col-md-6 col-md-offset-3 box img-rounded" >
                     <!--<pre>--> 
 
-                    <?php
+                        <?php
 //                        print_r($post);die();
-                    ?>
-                    <p ><?php echo utf8_decode($post['caption']['from']['username']) ?>:</p>
-                    <img src="<?php echo $post['images']['thumbnail']['url'] ?>" class="img-rounded" alt="" /><br />
-                    <p ><b>Likes: </b><?php echo utf8_decode($post['likes']['count']) ?></p>
-                    
-                    <p ><?php echo utf8_decode($post['caption']['text']) ?></p>
-                    
-                    <p ><b>comments: </b><?php echo utf8_decode($post['comments']['count']) ?></p>
-                    <div class="comments">
-                    <?php  foreach ($post['comments']['data'] as $comment){ ?>
-                            <p ><?php echo utf8_decode($comment['from']['username']) ?>:<?php echo utf8_decode($comment['text']) ?></p>
-                    <?php  } ?>
-                    </div>
+                        ?>
+                        <p ><?php echo utf8_decode($post['caption']['from']['username']) ?>:</p>
+                        <img src="<?php echo $post['images']['thumbnail']['url'] ?>" class="img-rounded" alt="" /><br />
+                        <p ><b>Likes: </b><?php echo utf8_decode($post['likes']['count']) ?></p>
 
-                </div>            
-                
-            <?php } ?>
-            
-        </div></div>
+                        <p ><?php echo utf8_decode($post['caption']['text']) ?></p>
 
-</div>
+                        <p ><b>comments: </b><?php echo utf8_decode($post['comments']['count']) ?></p>
+                        <?php if ($post['comments']['count'] > 0) { ?>
+                            <div class="comments img-rounded ">
+                                <?php foreach ($post['comments']['data'] as $comment) { ?>
+                                    <p ><?php echo utf8_decode($comment['from']['username']) ?>:<?php echo utf8_decode($comment['text']) ?></p>
+                                <?php } ?>
+                            </div>
+                        <?php } ?>
+
+                    </div>            
+
+                <?php } ?>
+
+            </div></div>
+
+    </div>
 </body>
 </html>
