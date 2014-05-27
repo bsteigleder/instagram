@@ -12,3 +12,12 @@ and open the template in the editor.
 body{
     background-color: #968B7C;
 }
+.center
+{
+    margin: auto;
+        display: block
+}
+.box{
+    border: 1px solid #ccc;
+    margin-top: 10px;
+}
