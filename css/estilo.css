@@ -20,4 +20,5 @@ body{
 .box{
     border: 1px solid #ccc;
     margin-top: 10px;
+    background-color: #D3D3D3;
 }
