@@ -27,14 +27,23 @@ $all = json_decode($json, true);
                 <?php
                 foreach ($all['data'] as $post) {?>
                     <div class = "col-md-6 col-md-offset-3 box img-rounded" >
-                    <!--<pre> -->
+                    <!--<pre>--> 
 
                     <?php
-                        //print_r($post);die();
+//                        print_r($post);die();
                     ?>
-                    <p ><?php echo utf8_decode($post['caption']['from']['username']) ?></p>
+                    <p ><?php echo utf8_decode($post['caption']['from']['username']) ?>:</p>
                     <img src="<?php echo $post['images']['thumbnail']['url'] ?>" class="img-rounded" alt="" /><br />
+                    <p ><b>Likes: </b><?php echo utf8_decode($post['likes']['count']) ?></p>
+                    
                     <p ><?php echo utf8_decode($post['caption']['text']) ?></p>
+                    
+                    <p ><b>comments: </b><?php echo utf8_decode($post['comments']['count']) ?></p>
+                    <div class="comments">
+                    <?php  foreach ($post['comments']['data'] as $comment){ ?>
+                            <p ><?php echo utf8_decode($comment['from']['username']) ?>:<?php echo utf8_decode($comment['text']) ?></p>
+                    <?php  } ?>
+                    </div>
 
                 </div>            
                 
