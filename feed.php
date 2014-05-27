@@ -26,7 +26,7 @@ $all = json_decode($json, true);
 
                 <?php
                 foreach ($all['data'] as $post) {?>
-                    <div class = "col-md-6 col-md-offset-3 box" >
+                    <div class = "col-md-6 col-md-offset-3 box img-rounded" >
                     <!--<pre> -->
 
                     <?php
