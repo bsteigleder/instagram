@@ -3,6 +3,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/estilo.css">
 
         <!-- Optional theme -->
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
