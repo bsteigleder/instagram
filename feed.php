@@ -1,4 +1,5 @@
 <?php
+header('Access-Control-Allow-Origin: *'); 
 include 'functions.php';
 session_start();
 
@@ -27,9 +28,9 @@ if (!isset($_SESSION['access_token'])) {
 //printrx($_SESSION);
 $json = file_get_contents("https://api.instagram.com/v1/users/self/feed?access_token=$token");
 //$json = file_get_contents('feed.json');
-
+//print_r($json);die('oi');
 $all = json_decode($json, true);
-//print_r($all);
+
 //die();
 ?>
 <html>
@@ -59,7 +60,9 @@ $all = json_decode($json, true);
                         <p class="btn" onclick="newfoto('<?php echo $post['id'] ?>','<?php echo $post['images']['thumbnail']['url'] ?>')" >Min</p>
                         <p class="btn" onclick="newfoto('<?php echo $post['id'] ?>','<?php echo $post['images']['low_resolution']['url'] ?>')" >Med</p>
                         <p class="btn" onclick="newfoto('<?php echo $post['id'] ?>','<?php echo $post['images']['standard_resolution']['url'] ?>')" >Max</p>
-                        
+                        <br>
+                        <br>
+                        <p class="btn" id="like_<?php echo $post['id'] ?>" onclick="like('<?php echo $post['id'] ?>')" >S2</p>
                         <p ><b>Likes: </b><?php echo utf8_decode($post['likes']['count']) ?></p>
 
                         <p ><?php echo utf8_decode($post['caption']['text']) ?></p>
