@@ -1,5 +1,5 @@
 <?php
-header('Access-Control-Allow-Origin: *'); 
+header('Access-Control-Allow-Origin: *');
 include 'functions.php';
 session_start();
 
@@ -25,12 +25,13 @@ if (!isset($_SESSION['access_token'])) {
 } else {
     $token = $_SESSION['access_token'];
 }
+
 //printrx($_SESSION);
-$json = file_get_contents("https://api.instagram.com/v1/users/self/feed?access_token=$token");
-//$json = file_get_contents('feed.json');
+//$json = file_get_contents("https://api.instagram.com/v1/users/self/feed?access_token=$token");
+$json = file_get_contents('feed.json');
 //print_r($json);die('oi');
 $all = json_decode($json, true);
-
+//printrx($all);
 //die();
 ?>
 <html>
@@ -46,20 +47,24 @@ $all = json_decode($json, true);
     </head>
     <body>
         <div class="container">
-            <div class="row">
+            <div class="row" ID="all" >
 
-                <?php foreach ($all['data'] as $post) {  ?>
+                <?php foreach ($all['data'] as $post) {
+                   // $like =likes($post['likes']['data']);
+                    //var_dump($like);
+                    
+                    ?>
                     <div class = "col-md-6 col-md-offset-3 box img-rounded" >
                     <!--<pre>--> 
 
                         <?php
 //                        print_r($post);die();
                         ?>
-                        <p ><?php echo utf8_decode($post['user']['full_name']." ( ".$post['user']['username']." )") ?>:</p>
+                        <p ><?php echo utf8_decode($post['user']['full_name'] . " ( " . $post['user']['username'] . " )") ?>:</p>
                         <img id="<?php echo $post['id']; ?>" src="<?php echo $post['images']['thumbnail']['url'] ?>" class="img-rounded" alt="" /><br />
-                        <p class="btn" onclick="newfoto('<?php echo $post['id'] ?>','<?php echo $post['images']['thumbnail']['url'] ?>')" >Min</p>
-                        <p class="btn" onclick="newfoto('<?php echo $post['id'] ?>','<?php echo $post['images']['low_resolution']['url'] ?>')" >Med</p>
-                        <p class="btn" onclick="newfoto('<?php echo $post['id'] ?>','<?php echo $post['images']['standard_resolution']['url'] ?>')" >Max</p>
+                        <p class="btn" onclick="newfoto('<?php echo $post['id'] ?>', '<?php echo $post['images']['thumbnail']['url'] ?>')" >Min</p>
+                        <p class="btn" onclick="newfoto('<?php echo $post['id'] ?>', '<?php echo $post['images']['low_resolution']['url'] ?>')" >Med</p>
+                        <p class="btn" onclick="newfoto('<?php echo $post['id'] ?>', '<?php echo $post['images']['standard_resolution']['url'] ?>')" >Max</p>
                         <br>
                         <br>
                         <p class="btn" id="like_<?php echo $post['id'] ?>" onclick="like('<?php echo $post['id'] ?>')" >S2</p>
@@ -82,7 +87,8 @@ $all = json_decode($json, true);
                 <?php } ?>
 
             </div></div>
-
+        
     </div>
+    <p class="btn" style="width: 130px" onclick="pagination('<?php echo $all['pagination']['next_max_id'] ?>')" >Carregar mais</p>
 </body>
 </html>

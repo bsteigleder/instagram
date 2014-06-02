@@ -21,6 +21,17 @@ function post_to_url($url, $data) {
    curl_close($post);
    return $result;
 }
+function likes($likes){
+    return TRUE;
+    // a api do instagram nao retorna todos os likes :(
+    //printrx($_SESSION);
+    foreach ($likes as $like){
+        if($_SESSION['user']['id']==$like['id'])
+            return TRUE;
+        //printrx($like);
+    }
+    return false;
+}
 
 //error_reporting();
 function newLocation($url) {
