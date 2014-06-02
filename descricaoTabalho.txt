@@ -1,0 +1,1 @@
+Vou utilizar a api do instagram para desenvolver uma versao mais rapida devido a lentidao do aplicativo original do instagram.
