@@ -2,9 +2,6 @@
 header('Access-Control-Allow-Origin: *');
 include 'functions.php';
 session_start();
-
-
-
 $data = array(
     'client_id' => '8dcfc9cf4d684b5baeaf00a053f28785',
     'client_secret' => 'b06d722dbe3042d6b8c1081ab7cf97df',
@@ -17,6 +14,7 @@ if (isset($_GET['code'])) {
 
 if (!isset($_SESSION['access_token'])) {
     $ret = post_to_url("https://api.instagram.com/oauth/access_token", $data);
+    
     $_SESSION = json_decode($ret, true);
     if (isset($_GET['code'])) {
         $_SESSION['code'] = $_GET['code'];
@@ -27,8 +25,8 @@ if (!isset($_SESSION['access_token'])) {
 }
 
 //printrx($_SESSION);
-//$json = file_get_contents("https://api.instagram.com/v1/users/self/feed?access_token=$token");
-$json = file_get_contents('feed.json');
+$json = file_get_contents("https://api.instagram.com/v1/users/self/feed?access_token=$token");
+//$json = file_get_contents('feed.json');
 //print_r($json);die('oi');
 $all = json_decode($json, true);
 //printrx($all);
@@ -89,6 +87,8 @@ $all = json_decode($json, true);
             </div></div>
         
     </div>
-    <p class="btn" style="width: 130px" onclick="pagination('<?php echo $all['pagination']['next_max_id'] ?>')" >Carregar mais</p>
+    <div id="pagina" >
+        <p class="btn"  style="width: 130px" onclick="pagination('<?php echo $all['pagination']['next_max_id'] ?>')" >Carregar mais</p>
+    </div>
 </body>
 </html>

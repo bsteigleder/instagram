@@ -1,40 +1,60 @@
 function newfoto(id, url) {
     document.getElementById(id).src = url;
 }
-function pagination(next){
-    url = "pagination.php?next="+next;
+function pagination(next) {
+    url = "pagination.php?next=" + next;
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function(ret) {
         if (xhr.readyState == 4) {
             data = JSON.parse(xhr.response);
-            var div = document.getElementById('divID');
-            div.innerHTML = div.innerHTML + 'Extra stuff';
-            for (var i = 0; i < arrayOfObjects.length; i++) {    
-                var object = arrayOfObjects[i];
-           }
-    // If property names are known beforehand, you can also just do e.g.
-    // alert(object.id + ',' + object.Title);
-}
-            //alert(xhr.response);
-            //document.getElementById("like_"+id).style.display="none";
+            
+            var div = document.getElementById('all');
+            for (var i = 0; i < data.data.length; i++) {
+                var object = data.data[i];
+                console.log(object);
+                var novo= "<div class='col-md-6 col-md-offset-3 box img-rounded'>";
+                        novo+="<p>"+object.user.full_name+" ( "+object.user.username+" ):</p>";
+                        novo+="<img id='"+object.id+"' src='"+object.images.thumbnail.url+"' class='img-rounded' alt=''><br>";
+                        novo+="<p class='btn' onclick='newfoto(\""+object.id+"\", \""+object.images.thumbnail.url+"\")'>Min</p>";
+                        novo+="<p class='btn' onclick='newfoto(\""+object.id+"\", \""+object.images.low_resolution.url+"\")'>Med</p>";
+                        novo+="<p class='btn' onclick='newfoto(\""+object.id+"\", \""+object.images.standard_resolution.url+"\")'>Max</p>";
+                        novo+="<br>";
+                        novo+="<br>";
+                        novo+="<p class='btn' id='like_"+object.id+"' onclick='like(\""+object.id+"\")'>S2</p>";
+                        novo+="<p><b>Likes: </b>"+object.likes.count+"</p>";
+                        novo+="<p></p>";
+                        novo+="<p><b>comments: </b>"+object.comments.count+"</p>";
+                    novo+="</div>";
+                    div.innerHTML = div.innerHTML + novo;
+            }
+            
+            var element = document.getElementById("pagina");
+            paginacao="<p class='btn teste'   style='width: 130px' onclick='pagination(\""+data.pagination.next_max_id+"\")' >Carregar mais</p>";
+            //element.parentNode.removeChild(element);
+            element.innerHTML = paginacao;
+            // If property names are known beforehand, you can also just do e.g.
+            // alert(object.id + ',' + object.Title);
         }
+        //alert(xhr.response);
+        //document.getElementById("like_"+id).style.display="none";
+
     }
-    
+
     xhr.open('GET', url, true);
-    xhr.send("next="+next);
+    xhr.send("next=" + next);
 }
 function like(id) {
-    url = "like.php?id="+id;
+    url = "like.php?id=" + id;
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4) {
             alert("vc deu um Like :)");
-            document.getElementById("like_"+id).style.display="none";
+            document.getElementById("like_" + id).style.display = "none";
         }
     }
-    
+
     xhr.open('GET', url, true);
-    xhr.send("id="+id);
+    xhr.send("id=" + id);
 }
 
 var ajax = {};
