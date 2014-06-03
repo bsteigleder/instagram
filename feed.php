@@ -36,7 +36,7 @@ $all = json_decode($json, true);
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/estilo.css">
-
+        <title>FastInsta</title>
         <!-- Optional theme -->
         <!--<link rel="stylesheet" href="css/bootstrap-theme.min.css">-->
 

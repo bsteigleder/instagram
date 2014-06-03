@@ -1,5 +1,14 @@
+<?php
+include('functions.php');
+session_start();
+//printrx($_SESSION);
+if (isset($_SESSION['code'])||isset($_SESSION['access_token'])){
+    header("location: feed.php");
+}
+?>
 <html>
     <head>
+        <title>FastInsta</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
