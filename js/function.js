@@ -1,7 +1,17 @@
 function newfoto(id, url) {
+    showLoader();
     document.getElementById(id).src = url;
+    
+}
+function hideLoader(){
+    document.getElementById("loader").style.display="none";
+}
+
+function showLoader(){
+    document.getElementById("loader").style.display="block";
 }
 function pagination(next) {
+    showLoader();
     url = "pagination.php?next=" + next;
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function(ret) {
@@ -14,7 +24,7 @@ function pagination(next) {
                 console.log(object);
                 var novo= "<div class='col-md-6 col-md-offset-3 box img-rounded'>";
                         novo+="<p>"+object.user.full_name+" ( "+object.user.username+" ):</p>";
-                        novo+="<img id='"+object.id+"' src='"+object.images.thumbnail.url+"' class='img-rounded' alt=''><br>";
+                        novo+="<img onload='hideLoader();' id='"+object.id+"' src='"+object.images.thumbnail.url+"' class='img-rounded' alt=''><br>";
                         novo+="<p class='btn' onclick='newfoto(\""+object.id+"\", \""+object.images.thumbnail.url+"\")'>Min</p>";
                         novo+="<p class='btn' onclick='newfoto(\""+object.id+"\", \""+object.images.low_resolution.url+"\")'>Med</p>";
                         novo+="<p class='btn' onclick='newfoto(\""+object.id+"\", \""+object.images.standard_resolution.url+"\")'>Max</p>";
@@ -34,6 +44,7 @@ function pagination(next) {
             element.innerHTML = paginacao;
             // If property names are known beforehand, you can also just do e.g.
             // alert(object.id + ',' + object.Title);
+            hideLoader();
         }
         //alert(xhr.response);
         //document.getElementById("like_"+id).style.display="none";
@@ -42,6 +53,7 @@ function pagination(next) {
 
     xhr.open('GET', url, true);
     xhr.send("next=" + next);
+    
 }
 function like(id) {
     url = "like.php?id=" + id;

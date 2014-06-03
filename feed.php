@@ -59,7 +59,7 @@ $all = json_decode($json, true);
 //                        print_r($post);die();
                         ?>
                         <p ><?php echo utf8_decode($post['user']['full_name'] . " ( " . $post['user']['username'] . " )") ?>:</p>
-                        <img id="<?php echo $post['id']; ?>" src="<?php echo $post['images']['thumbnail']['url'] ?>" class="img-rounded" alt="" /><br />
+                        <img onload="hideLoader();" id="<?php echo $post['id']; ?>" src="<?php echo $post['images']['thumbnail']['url'] ?>" class="img-rounded" alt="" /><br />
                         <p class="btn" onclick="newfoto('<?php echo $post['id'] ?>', '<?php echo $post['images']['thumbnail']['url'] ?>')" >Min</p>
                         <p class="btn" onclick="newfoto('<?php echo $post['id'] ?>', '<?php echo $post['images']['low_resolution']['url'] ?>')" >Med</p>
                         <p class="btn" onclick="newfoto('<?php echo $post['id'] ?>', '<?php echo $post['images']['standard_resolution']['url'] ?>')" >Max</p>
@@ -89,6 +89,11 @@ $all = json_decode($json, true);
     </div>
     <div id="pagina" >
         <p class="btn"  style="width: 130px" onclick="pagination('<?php echo $all['pagination']['next_max_id'] ?>')" >Carregar mais</p>
+    </div>
+    
+    <div  id="loader">
+        <img class="camera" src="img/logo.png" alt="" />
+        <!--<img class="loader" src="img/loader.gif" alt="" />-->
     </div>
 </body>
 </html>
